@@ -7,6 +7,7 @@ daemon = True
 debug = False
 name = "thinblue"
 timeout = 8
+uid=None
 
 
 DAEMON_LOG_FILE = "/var/log/thinblue.log"
@@ -28,3 +29,5 @@ file_path = "/var/lib/thinblue/files/"
 sendfile = ""
 
 thread_verbose = False
+
+#print "D: thinblue.config loaded"

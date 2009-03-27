@@ -1,45 +1,66 @@
-__all__=['logger', 'config', 'search', 'obexftpsend', 'send', 'db', 'daemonize']
+
 
 import thinblue.config
 import thinblue.logger as lg
 
 import os
+import pwd
+
+import thinblue.db
 
 def init():
-    import thinblue.db
-    #lg.debug("loading settings from database", __name__)
+    import thinblue.config
+    try:
+        uid=pwd.getpwnam("www-data")
+    except KeyError:
+        print >> sys.stderr, "User www-data not found"
+        sys.exit(1)
+    thinblue.config.uid=uid[2]
+    lg.debug("www-data userid=%s"%thinblue.config.uid, __name__)
     
+    # set rights of database dir
+    if not os.path.isdir( os.path.dirname(thinblue.config.DBNAME) ):
+        os.mkdir( os.path.dirname(thinblue.config.DBNAME) )
+    
+    if not os.path.isfile(thinblue.config.DBNAME):
+        thinblue.db.create_db()
+    
+    os.chown(thinblue.config.DBNAME, uid[2], uid[3])
+
+    
+    lg.debug("loading settings from database", __name__)
     
     sendfile=thinblue.db.query("SELECT sendfile from config;")[0][0]
     thinblue.config.sendfile=sendfile
+    lg.debug("sendfile=%s"%thinblue.config.sendfile, __name__)
     
     file_path=thinblue.db.query("SELECT file_path from config;")[0][0]
     thinblue.config.file_path=file_path
-    
-#    debug=thinblue.db.query("SELECT debug from config;")[0][0]
-#    if debug > 0:
-#        thinblue.config.debug=True
-#    else:
-#        thinblue.config.debug=False
+    lg.debug("file_path=%s"%thinblue.config.file_path, __name__)
     
     timeout=thinblue.db.query("SELECT timeout from config;")[0][0]
     thinblue.config.timeout=int(timeout)
+    lg.debug("timeout=%s"%thinblue.config.timeout, __name__)
     
     concurrent=thinblue.db.query("SELECT concurrent from config;")[0][0]
     thinblue.config.concurrent=int(concurrent)
+    lg.debug("concurrent=%s"%thinblue.config.concurrent, __name__)
     
     # set stop to 0
     thinblue.db.query("UPDATE config SET stop=0;")
     thinblue.config.stop=False
     
-    #lg.debug("settings loaded", __name__)
+    lg.debug("init() settings loaded", __name__)
+    thinblue.db.close()
 
 def do_stop():
     thinblue.db.query("UPDATE config SET stop=1;")
     thinblue.config.stop=True
     #lg.info("Stopping...", __name__)
+    thinblue.db.close()
 
 def is_stoping(dosql=False):
+    #print "is stopping"
     if not dosql:
         return thinblue.config.stop
     try:
@@ -49,6 +70,7 @@ def is_stoping(dosql=False):
         return False
     
     if stop == 1:
+        lg.info("is_stopping() True...", __name__)
         return True
     elif stop == 2:
         # reload config
@@ -56,6 +78,7 @@ def is_stoping(dosql=False):
         init()
         return False
     else:
+        #lg.info("is_stopping() False...", __name__)
         return False
 
 def load_devices():
@@ -85,3 +108,5 @@ def load_devices():
         os.system("hciconfig %s up noscan noauth noencrypt" %dev['dev'])
     
     lg.debug("Found 2 Bluetooth devices %s"%alldevices, __name__)
+
+__all__=['logger', 'config', 'search', 'obexftpsend', 'send', 'db', 'daemonize']

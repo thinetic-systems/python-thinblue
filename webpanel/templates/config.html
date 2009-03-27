@@ -1,0 +1,76 @@
+$def with (session, data)
+$var user:$session.user
+
+
+<h1 class="clear">Configuración</h1>
+
+<!--
+<table id="config">
+    <tr>
+        <td>Concurrent</td>
+        <td>$data.concurrent</td>
+    </tr>
+    <tr>
+        <td>Timeout</td>
+        <td>$data.timeout</td>
+    <tr>
+        <td>Debug</td>
+        <td>$data.debug</td>
+    </tr>
+    <tr>
+        <td>Stop</td>
+        <td>$data.stop</td>
+    </tr>
+    <tr>
+        <td>File path</td>
+        <td>$data.file_path</td>
+    </tr>
+    <tr>
+        <td>Sendfile</td>
+        <td>$data.sendfile</td>
+    </tr>
+</table>
+-->
+
+<form method="post" action="/config">
+<table id="config" border=1>
+    <tr>
+        <td>Debug: </td>
+        <td>
+            <input type="checkbox" name="debug" id="debug" value=1 $data.debugtxt >
+        </td>
+    </tr>
+    <tr>
+        <td>Timeout búsqueda nuevos: </td>
+        <td>
+            <input type="text" name="timeout" id="timeout" size='3' value="$data.timeout" > (seg), recomendado 8.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>Conexiones de envío concurrentes: </td>
+        <td>
+            <input type="text" name="concurrent" id="concurrent" size='3' value="$data.concurrent" > (4 por defecto)
+        </td>
+    </tr>
+    
+    <tr>
+        <td>Ruta de archivos: </td>
+            <td>$data.file_path</td>
+    </tr>
+    
+    <tr>
+        <td>Archivo por defecto: </td>
+        <td>$data.sendfile</td>
+    </tr>
+    
+    <tr>
+        <td colspan=2>
+            <input type="submit" value="Enviar">
+            <input type="button" value="Reset" onclick='javascript:$("op").text="reset";document.forms[0].submit();'>
+            <input type="hidden" name="op" id="op" value="save">
+        </td>
+    </tr>
+</table>
+</form>
+

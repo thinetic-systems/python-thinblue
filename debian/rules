@@ -9,8 +9,12 @@ include /usr/share/cdbs/1/class/python-distutils.mk
 
 
 
-binary-predeb/python-thinblue::
-	install -d debian/python-thinblue/usr/sbin
-	mv debian/python-thinblue/usr/bin/thinblue.py debian/python-thinblue/usr/sbin/thinblue
-	rmdir debian/python-thinblue/usr/bin
+binary-predeb/thinblue::
+	install -d debian/thinblue/usr/sbin
+	mv debian/thinblue/usr/bin/thinblue.py    debian/thinblue/usr/sbin/thinblue
+	mv debian/thinblue/usr/bin/thinblueweb.py debian/thinblue/usr/sbin/thinblueweb
+	rmdir debian/thinblue/usr/bin
+
+	rm debian/thinblue/usr/share/thinblue/static/jquery.js
+	dh_link usr/share/thinblue/static/jquery-1.3.2.min.js usr/share/thinblue/static/jquery.js
 

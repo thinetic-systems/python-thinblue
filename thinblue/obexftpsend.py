@@ -93,7 +93,7 @@ def sendfile(address, source):
     
     # obexftp --noconn --nopath --uuid=none -b 00:00:00:00:00:00 -B __CHANNEL__ -p ~/Desktop/thinetic.jpg
     
-    cmd=["obexftp", "--nopath", "--noconn", "--uuid=none", 
+    cmd=["obexftp", "--verbose", "--nopath", "--noconn", "--uuid=none", 
          "--bluetooth", str(address), "--channel", str(services['obex_push_channel']) , 
          "--put", str(source) ]
          

@@ -1,3 +1,11 @@
+python-thinblue (0.2-1) unstable; urgency=low
+
+  * Remade some code to work with standalone web server (wsgi)
+  * Remove old PHP webpanel
+  * Use sqlite3 and 'thread save' code
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Tue, 24 Mar 2009 15:55:15 +0100
+
 python-thinblue (0.0.1-1) unstable; urgency=low
 
   * First version

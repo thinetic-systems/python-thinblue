@@ -54,6 +54,16 @@ thinblue
 """
     sys.exit(0)
 
+def drop_privileges():
+    #    >>> for u in pwd.getpwall():
+    #...   if u[0]=="www-data":
+    #...       print u
+    #... 
+    #('www-data', 'x', 33, 33, 'www-data', '/var/www', '/bin/sh')
+    # get www-data user id
+    pass
+
+
 import thinblue
 thinblue.init()
 
@@ -92,9 +102,7 @@ if __name__ == '__main__':
         print msg
         print "for command line options use thinblue --help"
         sys.exit(2)
-
     
-
     for o, a in OPTS:
         if o == "--start":
             
@@ -103,7 +111,7 @@ if __name__ == '__main__':
                 thinblue.daemonize.start_server()
                 sys.stderr = lg.stderr()
                 sys.stdout = lg.stdout()
-                
+            lg.debug("run now", __name__)
             run()
         
         elif o == "--stop":
@@ -116,6 +124,7 @@ if __name__ == '__main__':
             pid = open(thinblue.config.DAEMON_PID_FILE, 'r').read().strip()
             print ( " wating for pid %s... "%pid )
             while os.path.isdir("/proc/%s"%pid):
+                print ( " wating for pid %s... "%pid )
                 time.sleep(0.5)
             os.remove(thinblue.config.DAEMON_PID_FILE)
         

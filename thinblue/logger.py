@@ -13,7 +13,7 @@ logging.basicConfig(level=loglevel,
                     format='%(asctime)s [%(levelname)s] %(message)s',
                     filename=thinblue.config.DAEMON_LOG_FILE,
                     filemode='a')
-#print "logging configured... daemon=%s"%thinblue.config.daemon
+#print "D: logging configured... daemon=%s"%thinblue.config.daemon
 
 def debug(txt, name=thinblue.config.name):
     if thinblue.config.daemon:
@@ -44,8 +44,10 @@ def error(txt, name=thinblue.config.name):
 
 class stderr(object):
     def write(self, data):
+        if data == '\n': return
         warning(data.replace('\n\n','\n'), "STDERR")
 
 class stdout(object):
     def write(self, data):
+        if data == '\n': return
         warning(data.replace('\n\n','\n'), "STDOUT")

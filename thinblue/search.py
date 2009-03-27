@@ -42,7 +42,7 @@ class Phone(object):
         self.address=address
         self.services=[]
         
-        
+        lg.info("Phone: NEW phone device", __name__)
         # populate services
         for bitpos, classname in BLUE_SERVICES:
             if device_class & (1 << (bitpos-1)):
@@ -58,16 +58,16 @@ class Phone(object):
         #lg.debug("Phone() res=%s"%res, __name__)
         
         if len(res) > 0:
-            if "fail" in res[0]['status'] or res[0]['status'] == "send" or res[0]['status'] == "sending":
+            if "fail" in res[0][1] or res[0][1] == "send" or res[0][1] == "sending":
                 #lg.debug("Phone address (%s) status send/sending or fail (%s) skiping..." %(self.address, res[0]['status']), __name__)
                 return
         
-            if res[0]['status'] == "seen1":
+            if res[0][1] == "seen1":
                 lg.debug("Phone address (%s) in database as seen1, set to pending..." %self.address, __name__)
                 thinblue.db.query("UPDATE phones set status='pending' WHERE address='%s'" %self.address)
                 return
                 
-            if res[0]['status'] == "pending":
+            if res[0][1] == "pending":
                 #lg.debug("Phone address (%s) in pending status skiping..." %self.address, __name__)
                 return
             
@@ -104,7 +104,7 @@ bluetooth.bluez._gethcisock=_gethcisock
 
 class DiscoverAndSend(bluetooth.DeviceDiscoverer):
     def pre_inquiry(self):
-        #lg.debug("DiscoverAndSend::pre_inquiry()", __name__)
+        lg.debug("DiscoverAndSend::pre_inquiry()", __name__)
         self.done = False
         self.thinblue_found_devices=[]
 
@@ -155,7 +155,7 @@ class DiscoverAndSend(bluetooth.DeviceDiscoverer):
         self.names_found = {}
 
     def device_discovered(self, address, device_class, name):
-        #lg.debug("%s 0x%X %s" %(address, device_class, name), __name__)
+        lg.debug("device_discovered() %s 0x%X %s" %(address, device_class, name), __name__)
         if address in self.thinblue_found_devices:
             return
         
@@ -167,15 +167,16 @@ class DiscoverAndSend(bluetooth.DeviceDiscoverer):
             blue_type="unknown"
         
         if blue_type != BLUE_TYPES[2]:
-            #lg.debug("Device '%s' is not a phone => '%s'" %(address, blue_type), __name__)
+            lg.debug("Device '%s' is not a phone => '%s'" %(address, blue_type), __name__)
             return
         
         phone=Phone(address, device_class, name)
         self.thinblue_found_devices.append(address)
         del(phone)
+        lg.debug("device_discovered() finish", __name__)
 
     def inquiry_complete(self):
-        #lg.debug("DiscoverAndSend::inquiry_complete()", __name__)
+        lg.debug("DiscoverAndSend::inquiry_complete()", __name__)
         alladdress=""
         # get all found devices and update database to not set pending a no near phone
         if len(self.thinblue_found_devices):
@@ -195,6 +196,7 @@ class DiscoverAndSend(bluetooth.DeviceDiscoverer):
 def main():
     lg.debug("init searchs ...", __name__)
     d = DiscoverAndSend()
+    lg.debug("first search ", __name__)
     d.find_devices(duration=thinblue.config.timeout)
     readfiles = [ d, ]
     

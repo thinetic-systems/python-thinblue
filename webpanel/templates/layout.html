@@ -1,0 +1,33 @@
+$def with (page)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+  <title>ThinBlue</title>
+  <link rel="stylesheet" href="/data/styles.css" type="text/css" media="screen" charset="utf-8"/>
+  <script type="text/javascript" src="/data/jquery.js"></script>
+  <script type="text/javascript" src="/data/thinblue.js"></script>
+</head>
+<body>
+<div id="container">
+
+$if page.user != 'anonymous':
+    <div id="menu">
+    <ul>
+    <li><a href='/main'>Inicio</a></li>
+    <li><a href='/config'>Configuración</a></li>
+    <li><a href='/files'>Archivo</a></li>
+    <li><a href='/phones'>Accesos</a></li>
+    <li><a href='/logout'>Salir</a></li>
+    </ul>
+    </div>
+
+$:page
+
+<div id="footer"><a href="http://thinetic.es">Thinetic Systems SLNE</a></div>
+</div>
+</body>
+</html>
+
+
+
+

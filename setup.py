@@ -18,11 +18,12 @@ def get_files(ipath):
     return files
 
 
-data_files.append(('share/python-thinblue/webpanel', get_files("webpanel") ))
+data_files.append(('share/thinblue/static', get_files("webpanel/static") ))
+data_files.append(('share/thinblue/templates', get_files("webpanel/templates") ))
 
 data_files.append(('/var/lib/thinblue/data', ["data/thinetic.jpg"] ))
 
-data_files.append(('/etc/logrotate.d', ["data/python-thinblue.logrotate.conf"] ))
+data_files.append(('/etc/logrotate.d', ["data/thinblue.conf"] ))
 
 
 setup(name='ThinBlue',
@@ -36,7 +37,7 @@ setup(name='ThinBlue',
       keywords = ['bluetooth', 'files', 'daemon'],
       packages=['thinblue' ],
       package_dir = {'':''},
-      scripts=['thinblue.py'],
+      scripts=['thinblue.py', 'thinblueweb.py'],
       data_files=data_files
       )
 
