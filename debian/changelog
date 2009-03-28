@@ -1,3 +1,11 @@
+python-thinblue (0.4-1) UNRELEASED; urgency=low
+
+  * fir stop thinblueweb only if PID exists
+  * add copyright headers in all python code and fix thinblue/db.py
+    Sqlite3 object in python2.4
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Sat, 28 Mar 2009 22:54:51 +0100
+
 python-thinblue (0.3-1) unstable; urgency=low
 
   * New upstream release
