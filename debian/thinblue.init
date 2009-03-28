@@ -67,8 +67,11 @@ do_start()
 do_stop()
 {
     $DAEMON --stop
-    PID=$(cat /var/run/thinblueweb.pid)
-    kill $PID
+    if [ -e /var/run/thinblueweb.pid ]; then
+      PID=$(cat /var/run/thinblueweb.pid)
+      kill $PID
+      rm -f /var/run/thinblueweb.pid
+    fi
 }
 
 
