@@ -21,7 +21,8 @@ def get_files(ipath):
 data_files.append(('share/thinblue/static', get_files("webpanel/static") ))
 data_files.append(('share/thinblue/templates', get_files("webpanel/templates") ))
 
-data_files.append(('/var/lib/thinblue/data', ["data/thinetic.jpg"] ))
+data_files.append(('/var/lib/thinblue/files', ["data/thinetic.jpg"] ))
+data_files.append(('/var/lib/thinblue/sessions', ["data/.placeholder"] ))
 
 data_files.append(('/etc/logrotate.d', ["data/thinblue.conf"] ))
 
