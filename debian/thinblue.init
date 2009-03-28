@@ -43,12 +43,10 @@ do_start()
     if [ "$(grep -c thinnobind /proc/cmdline)" = "0" ] && [ -d /.dirs/dev/ ]; then
 
         mkdir -p /.dirs/dev/thinblue
-	cp /var/lib/thinblue/data/* /.dirs/dev/thinblue
+	cp /var/lib/thinblue/files/* /.dirs/dev/thinblue
         rm -rf /var/lib/thinblue/files
 	ln -s /.dirs/dev/thinblue /var/lib/thinblue/files
 
-    else
-	cp /var/lib/thinblue/data/* /var/lib/thinblue/files/
     fi
 
     # no start if nothinblue is in cmdline

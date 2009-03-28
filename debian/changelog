@@ -1,3 +1,13 @@
+python-thinblue (0.3-1) unstable; urgency=low
+
+  * New upstream release
+   - move thinetic.jpg from data to files, set default file and create
+     dir /var/lib/thinblue/sessions
+  * debian/thinblue.init:
+    - Remove /var/lib/thinblue/data stuff
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Sat, 28 Mar 2009 17:11:40 +0100
+
 python-thinblue (0.2-2) unstable; urgency=low
 
   * Update compat to version 7
