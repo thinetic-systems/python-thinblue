@@ -1,3 +1,13 @@
+python-thinblue (0.2-2) unstable; urgency=low
+
+  * Update compat to version 7
+  * Update standards version to 3.8.1:
+    - Create /var/run if not exists
+  * debian/thinblue.init:
+    - Kill thinblueweb in stop
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Sat, 28 Mar 2009 16:37:00 +0100
+
 python-thinblue (0.2-1) unstable; urgency=low
 
   * Remade some code to work with standalone web server (wsgi)

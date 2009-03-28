@@ -18,8 +18,6 @@
 DESC="ThinBlue"
 NAME=thinblue
 DAEMON=/usr/sbin/$NAME
-
-
 SCRIPTNAME=/etc/init.d/thinblue
 
 
@@ -56,10 +54,14 @@ do_start()
     # no start if nothinblue is in cmdline
     grep -q nothinblue /proc/cmdline && exit 0
 
+    [ ! -d /var/run ] && mkdir -p /var/run
+
+    # start thinblue daemon 
+    # (use daemonize and double fork, not need start-stop-daemon)
     $DAEMON --start
 
     # start thinblueweb
-    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec /usr/sbin/thinblueweb -- --daemon
+    start-stop-daemon --start --quiet --pidfile /var/run/thinblueweb.pid --exec /usr/sbin/thinblueweb
 
 }
 
@@ -67,6 +69,8 @@ do_start()
 do_stop()
 {
     $DAEMON --stop
+    PID=$(cat /var/run/thinblueweb.pid)
+    kill $PID
 }
 
 
