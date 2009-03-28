@@ -26,7 +26,7 @@ send_device = -1
 stop = False
 
 file_path = "/var/lib/thinblue/files/"
-sendfile = ""
+sendfile = "thinetic.jpg"
 
 thread_verbose = False
 
