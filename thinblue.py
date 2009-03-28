@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 ##########################################################################
-# Python-ThinBlue writen by MarioDebian <mario.izquierdo@thinetic.es>
+# ThinBlueWeb writen by MarioDebian <mario.izquierdo@thinetic.es>
 #
-#    Python-ThinBlue version 0.0.1
+#    Python-ThinBlue              
 #
 # Copyright (c) 2009 Mario Izquierdo <mario.izquierdo@thinetic.es>
 #
