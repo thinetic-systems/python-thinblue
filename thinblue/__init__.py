@@ -48,7 +48,7 @@ def init():
     if not os.path.isfile(thinblue.config.DBNAME):
         thinblue.db.create_db()
     
-    os.chown(thinblue.config.DBNAME, uid[2], uid[3])
+    #os.chown(thinblue.config.DBNAME, uid[2], uid[3])
 
     
     lg.debug("loading settings from database", __name__)
@@ -121,6 +121,7 @@ def load_devices():
         alldevices.append(  {'dev':dev[0], 'address':dev[1]}  )
     if len(alldevices) != 2:
         lg.error("ERROR: Need 2 Bluetooth devices to work", __name__)
+        print >> lg.old_stderr, "ThinBlue error: need 2 Bluetooth devices to work, no starting..."
         sys.exit(1)
     thinblue.config.search_device=1
     thinblue.config.send_device=0

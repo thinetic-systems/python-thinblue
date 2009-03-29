@@ -35,10 +35,19 @@ logging.basicConfig(level=loglevel,
                     format='%(asctime)s [%(levelname)s] %(message)s',
                     filename=thinblue.config.DAEMON_LOG_FILE,
                     filemode='a')
-#print "D: logging configured... daemon=%s"%thinblue.config.daemon
+__logger=logging.getLogger()
+
+def setloglevel():
+    global loglevel
+    if thinblue.config.debug:
+        loglevel=logging.DEBUG
+    __logger.setLevel(loglevel)
+    
+
 
 def debug(txt, name=thinblue.config.name):
     if thinblue.config.daemon:
+        setloglevel()
         logging.debug("%s:: %s" % (name, txt))
     elif thinblue.config.debug:
         print "D:%s => %s" % (name, txt)
