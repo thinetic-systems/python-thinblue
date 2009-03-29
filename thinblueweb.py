@@ -30,8 +30,7 @@ import traceback
 import random
 from hashlib import sha1
 
-# configure port
-sys.argv.append('9090')
+
 
 DB="/var/lib/thinblue/database.db"
 if os.path.isdir("/.dirs/dev/thinblue"):
@@ -39,8 +38,8 @@ if os.path.isdir("/.dirs/dev/thinblue"):
 
 BASE="/usr/share/thinblue/webpanel/"
 # set BASE in git sources dir to debug
-#if os.path.abspath(os.curdir) == "/home/mario/thinetic/git/python-thinblue":
-#    BASE="/home/mario/thinetic/git/python-thinblue/webpanel/"
+if os.path.abspath(os.curdir) == "/home/mario/thinetic/git/python-thinblue":
+    BASE="/home/mario/thinetic/git/python-thinblue/webpanel/"
 
 SESSIONS_DIR="/var/lib/thinblue/sessions"
 
@@ -49,21 +48,31 @@ ALLOWED_CHARS=string.letters + string.digits + '-_.'
 
 
 import thinblue.config
-thinblue.config.debug=True
+thinblue.config.debug=False
+if "--debug" in sys.argv:
+    thinblue.config.debug=True
 thinblue.config.name="thinblueweb"
+thinblue.config.DAEMON_PID_FILE = "/var/run/thinblueweb.pid"
 import thinblue.logger as lg
 
+# load daemonize con configure
+import thinblue.daemonize
+lg.old_stderr=sys.stderr
+lg.old_stdout=sys.stdout
 sys.stderr = lg.stderr()
 sys.stdout = lg.stdout()
 
 import web
 web.config.debug = False
+if "--debug" in sys.argv:
+    web.config.debug=True
 web.config.session_parameters.cookie_name="ThinBlue"
+
 
 from web import form
 
 def debug(txt):
-    lg.info("thinblueweb::debug(): %s" %str(txt) )
+    lg.debug("thinblueweb::debug(): %s" %str(txt), name=thinblue.config.name )
     #print >> sys.stderr, "DEBUG: %s" %str(txt)
 
 
@@ -349,5 +358,24 @@ class static:
 
 
 if __name__ == "__main__":
-    app.run()
+    args=[]
+    for arg in sys.argv[1:]:
+        args.append(arg)
+    sys.argv=[sys.argv[0], '9090']
+    debug("main() sys.argv=%s args=%s" %(sys.argv,args) )
+    if "--start" in args:
+        debug("daemonize....")
+        thinblue.daemonize.start_server()
+        app.run()
+    
+    elif "--stop" in args:
+        thinblue.daemonize.stop_server(sys.argv[0])
+    
+    else:
+        print >> lg.old_stderr , """
+thinblueweb:
+        --start    - start web daemon
+        --stop     - stop daemon
 
+    You can access interface in http://localhost:9090
+"""
