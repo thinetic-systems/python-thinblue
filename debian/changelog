@@ -1,0 +1,44 @@
+python-thinblue (0.3-1) unstable; urgency=low
+
+  * move thinetic.jpg from data to files, set default file and create
+    dir /var/lib/thinblue/sessions
+  * add copyright headers in all python code and fix thinblue/db.py
+    Sqlite3 object in python2.4
+  * change static to data in loading.gif
+  * fix chown (not needed yet) and add avoid change logging level in
+    runtime
+  * save old sys stderr and stdout
+  * add daemonize support to thinblueweb.py
+  * fix stop thinblueweb only if PID exists
+  * add copyright headers in all python code and fix thinblue/db.py
+    Sqlite3 object in python2.4
+   - move thinetic.jpg from data to files, set default file and create
+     dir /var/lib/thinblue/sessions
+  * debian/thinblue.init:
+    - Remove /var/lib/thinblue/data stuff
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Sat, 28 Mar 2009 17:11:40 +0100
+
+python-thinblue (0.2-2) unstable; urgency=low
+
+  * Update compat to version 7
+  * Update standards version to 3.8.1:
+    - Create /var/run if not exists
+  * debian/thinblue.init:
+    - Kill thinblueweb in stop
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Sat, 28 Mar 2009 16:37:00 +0100
+
+python-thinblue (0.2-1) unstable; urgency=low
+
+  * Remade some code to work with standalone web server (wsgi)
+  * Remove old PHP webpanel
+  * Use sqlite3 and 'thread save' code
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Tue, 24 Mar 2009 15:55:15 +0100
+
+python-thinblue (0.0.1-1) unstable; urgency=low
+
+  * First version
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Thu, 16 Oct 2008 20:13:31 +0200
