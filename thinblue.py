@@ -109,6 +109,8 @@ if __name__ == '__main__':
             if not "--nodaemon" in sys.argv:
                 import thinblue.daemonize
                 thinblue.daemonize.start_server()
+                lg.old_stderr=sys.stderr
+                lg.old_stdout=sys.stdout
                 sys.stderr = lg.stderr()
                 sys.stdout = lg.stdout()
             lg.debug("run now", __name__)
@@ -122,9 +124,9 @@ if __name__ == '__main__':
                 sys.exit(0)
             # wait for pid if exists
             pid = open(thinblue.config.DAEMON_PID_FILE, 'r').read().strip()
-            print ( " wating for pid %s... "%pid )
+            print("waiting for pid %s"%pid)
             while os.path.isdir("/proc/%s"%pid):
-                print ( " wating for pid %s... "%pid )
+                #print ( " wating for pid %s... "%pid )
                 time.sleep(0.5)
             os.remove(thinblue.config.DAEMON_PID_FILE)
         
