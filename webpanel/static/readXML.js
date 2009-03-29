@@ -7,7 +7,7 @@ function reloadPhones(){
 	$("#ContentArea").empty();
 	
 	// put loading image
-	$("#ContentArea").append('<img class="center" src="/static/loading.gif" alt="loading..."/>');
+	$("#ContentArea").append('<img class="center" src="/data/loading.gif" alt="loading..."/>');
 	
 	// Open the students.xml file
 	$.get("/phones.xml",{},function(xml){
