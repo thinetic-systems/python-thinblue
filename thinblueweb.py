@@ -38,8 +38,8 @@ if os.path.isdir("/.dirs/dev/thinblue"):
 
 BASE="/usr/share/thinblue/webpanel/"
 # set BASE in git sources dir to debug
-#if os.path.abspath(os.curdir) == "/home/mario/thinetic/git/python-thinblue":
-#    BASE="/home/mario/thinetic/git/python-thinblue/webpanel/"
+if os.path.abspath(os.curdir) == "/home/mario/thinetic/git/python-thinblue":
+    BASE="/home/mario/thinetic/git/python-thinblue/webpanel/"
 
 SESSIONS_DIR="/var/lib/thinblue/sessions"
 

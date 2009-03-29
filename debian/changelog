@@ -16,8 +16,11 @@ python-thinblue (0.3-1) unstable; urgency=low
      dir /var/lib/thinblue/sessions
   * debian/thinblue.init:
     - Remove /var/lib/thinblue/data stuff
+  * thinblueweb.py (really merge)
+  * debian/thinblue.init:
+    - Start/Stop web daemon with --start/--stop argument
 
- -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Sat, 28 Mar 2009 17:11:40 +0100
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Mon, 30 Mar 2009 01:18:22 +0200
 
 python-thinblue (0.2-2) unstable; urgency=low
 
