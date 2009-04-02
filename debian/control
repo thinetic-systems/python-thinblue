@@ -11,7 +11,7 @@ Homepage: http://thinetic.es
 
 Package: thinblue
 Architecture: all
-Depends:  python, python-sqlite, python-bluez, python-lightblue,  
+Depends:  python, python-pysqlite2, python-bluez, python-lightblue,  
           sqlite3, bluez-utils, obexftp, logrotate, python-apsw,
           python-webpy, ${misc:Depends}, ${shlibs:Depends}, ${python:Depends}
 Description: Python daemon to search and send files to Bluetooth Phone devices
