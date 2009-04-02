@@ -29,7 +29,7 @@ data_files.append(('/etc/logrotate.d', ["data/thinblue.conf"] ))
 
 setup(name='ThinBlue',
       description = 'Send files using 2 bluetooth devices',
-      version='0.0.1',
+      version='0.3.1',
       author = 'Mario Izquierdo',
       author_email = 'mario.izquierdo@thinetic.es',
       url = 'http://www.thinetic.es',

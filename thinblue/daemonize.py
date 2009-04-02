@@ -24,6 +24,7 @@
 
 import os
 import sys
+import time
 import thinblue.config
 import thinblue.logger
 
@@ -75,7 +76,7 @@ def start_server():
     else:
         daemonize()
 
-def stop_server(proc_name, ignore = False):
+def stop_server(proc_name, ignore = False, wait = False):
     if not os.path.exists(thinblue.config.DAEMON_PID_FILE):
         killall(proc_name)
         if ignore: return
@@ -83,7 +84,11 @@ def stop_server(proc_name, ignore = False):
         
     pid = open(thinblue.config.DAEMON_PID_FILE, 'r').read().strip()
     os.popen('kill -15 %d' % int(pid))
-    os.remove(thinblue.config.DAEMON_PID_FILE) 
+    os.remove(thinblue.config.DAEMON_PID_FILE)
+    if wait:
+        print("waiting for pid %s"%pid)
+        while os.path.isdir("/proc/%s"%pid):
+            time.sleep(0.5)
 
 def status():
     if not os.path.exists(thinblue.config.DAEMON_PID_FILE):

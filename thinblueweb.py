@@ -36,7 +36,7 @@ DB="/var/lib/thinblue/database.db"
 if os.path.isdir("/.dirs/dev/thinblue"):
     DB="/.dirs/dev/thinblue/database.db"
 
-BASE="/usr/share/thinblue/webpanel/"
+BASE="/usr/share/thinblue/"
 # set BASE in git sources dir to debug
 if os.path.abspath(os.curdir) == "/home/mario/thinetic/git/python-thinblue":
     BASE="/home/mario/thinetic/git/python-thinblue/webpanel/"
@@ -369,7 +369,7 @@ if __name__ == "__main__":
         app.run()
     
     elif "--stop" in args:
-        thinblue.daemonize.stop_server(sys.argv[0])
+        thinblue.daemonize.stop_server(sys.argv[0], wait = True)
     
     else:
         print >> lg.old_stderr , """
