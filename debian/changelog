@@ -1,3 +1,14 @@
+python-thinblue (0.3.1-1) unstable; urgency=low
+
+  * New upstream version
+  * depends on python-pysqlite2 intead of python-sqlite
+  * add wait feature to stop_server() fix templates PATH and set version
+    to 0.3.1
+  * debian/thinblue.init: cosmetic changes
+  * Depends on python-webpy >= 0.310-1
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Fri, 03 Apr 2009 00:03:56 +0200
+
 python-thinblue (0.3-1) unstable; urgency=low
 
   * move thinetic.jpg from data to files, set default file and create

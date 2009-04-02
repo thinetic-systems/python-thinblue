@@ -13,9 +13,9 @@ Package: thinblue
 Architecture: all
 Depends:  python, python-pysqlite2, python-bluez, python-lightblue,  
           sqlite3, bluez-utils, obexftp, logrotate, python-apsw,
-          python-webpy, ${misc:Depends}, ${shlibs:Depends}, ${python:Depends}
+          python-webpy (>= 0.310-1), ${misc:Depends}, ${shlibs:Depends}, ${python:Depends}
 Description: Python daemon to search and send files to Bluetooth Phone devices
- Use Python bluetooth to discover devices, sqlite to save in a database
+ Use Python bluetooth to discover devices, sqlite3 to save in a database
  and sdtool && obexftp to send files.
  You can manage app using http://localhost:9090
 

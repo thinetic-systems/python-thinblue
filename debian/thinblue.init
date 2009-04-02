@@ -17,7 +17,11 @@
 
 DESC="ThinBlue"
 NAME=thinblue
+WEBNAME=thinblueweb
+
 DAEMON=/usr/sbin/$NAME
+WEBDAEMON=/usr/sbin/$WEBNAME
+
 SCRIPTNAME=/etc/init.d/thinblue
 
 
@@ -59,7 +63,7 @@ do_start()
     $DAEMON --start
 
     # start thinblueweb
-    /usr/sbin/thinblueweb --start
+    $WEBDAEMON --start
 
 }
 
@@ -67,14 +71,14 @@ do_start()
 do_stop()
 {
     $DAEMON --stop
-    /usr/sbin/thinblueweb --stop
+    $WEBDAEMON --stop
 }
 
 
 
 case "$1" in
   start)
-	log_daemon_msg "Starting $DESC" "$NAME"
+	log_daemon_msg "Starting $DESC"
 	do_start
 	case "$?" in
 		0|1) log_end_msg 0 ;;
@@ -82,7 +86,7 @@ case "$1" in
 	esac
 	;;
   stop)
-	log_daemon_msg "Stopping $DESC" "$NAME"
+	log_daemon_msg "Stopping $DESC"
 	do_stop
 	case "$?" in
 		0|1) log_end_msg 0 ;;
@@ -90,7 +94,7 @@ case "$1" in
 	esac
 	;;
   restart|force-reload)
-	log_daemon_msg "Restarting $DESC" "$NAME"
+	log_daemon_msg "Restarting $DESC"
 	do_stop
 	case "$?" in
 	  0|1)
