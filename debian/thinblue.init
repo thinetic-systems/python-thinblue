@@ -46,10 +46,11 @@ do_start()
     # link [CompactFlash]/thinblue in /var/lib/thinblue/files
     if [ "$(grep -c thinnobind /proc/cmdline)" = "0" ] && [ -d /.dirs/dev/ ]; then
 
-        mkdir -p /.dirs/dev/thinblue
-	cp /var/lib/thinblue/files/* /.dirs/dev/thinblue
-        rm -rf /var/lib/thinblue/files
-	ln -s /.dirs/dev/thinblue /var/lib/thinblue/files
+        if mkdir -p /.dirs/dev/thinblue 2>/dev/null; then
+	    cp /var/lib/thinblue/files/* /.dirs/dev/thinblue
+            rm -rf /var/lib/thinblue/files
+	    ln -s /.dirs/dev/thinblue /var/lib/thinblue/files
+        fi
 
     fi
 

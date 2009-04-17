@@ -1,3 +1,10 @@
+python-thinblue (0.3.1-2) unstable; urgency=low
+
+  * debian/thinblue.init:
+    - Don't use /.dirs/dev/thinblue if is not writable (CDROM)
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Fri, 17 Apr 2009 16:08:01 +0200
+
 python-thinblue (0.3.1-1) unstable; urgency=low
 
   * New upstream version
