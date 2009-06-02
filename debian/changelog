@@ -1,3 +1,9 @@
+python-thinblue (0.3.2-1) unstable; urgency=low
+
+  * Allow upload some media formats
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Tue, 02 Jun 2009 22:32:12 +0200
+
 python-thinblue (0.3.1-2) unstable; urgency=low
 
   * debian/thinblue.init:
