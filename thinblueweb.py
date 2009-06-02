@@ -44,6 +44,7 @@ if os.path.abspath(os.curdir) == "/home/mario/thinetic/git/python-thinblue":
 SESSIONS_DIR="/var/lib/thinblue/sessions"
 
 IMAGE_EXTENSIONS=['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ppm', 'pcx', 'tiff']
+MEDIA_EXTENSIONS=['jar', 'jad', '3gp', 'swf']
 ALLOWED_CHARS=string.letters + string.digits + '-_.'
 
 
@@ -262,9 +263,11 @@ class FileUpload(object):
                 self.filename=self.filename.replace(self.filename[c],'_')
 
     def isallowed(self):
-        if not self.filename.split('.')[-1] in IMAGE_EXTENSIONS:
-            return False
-        return True
+        if self.filename.split('.')[-1] in IMAGE_EXTENSIONS:
+            return True
+        elif self.filename.split('.')[-1] in MEDIA_EXTENSIONS:
+            return True
+        return False
 
     def save(self):
         entries = db.select('config')[0]
