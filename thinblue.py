@@ -73,6 +73,10 @@ def run():
     import thinblue.search
     #import thinblue.send
     import thinblue.obexftpsend
+
+    # device updater thread
+    import thinblue.update_device
+
     thinblue.load_devices()
     
     lg.info("init threads...", __name__)
@@ -82,6 +86,9 @@ def run():
     
     th_send = threading.Thread(target = thinblue.obexftpsend.main, verbose = thinblue.config.thread_verbose)
     th_send.start()
+
+    th_update = threading.Thread(target = thinblue.update_device.main, verbose = thinblue.config.thread_verbose)
+    th_update.start()
     
     lg.info("threads started...", __name__)
     
@@ -105,12 +112,11 @@ if __name__ == '__main__':
     
     for o, a in OPTS:
         if o == "--start":
-            
+            lg.old_stderr=sys.stderr
+            lg.old_stdout=sys.stdout
             if not "--nodaemon" in sys.argv:
                 import thinblue.daemonize
                 thinblue.daemonize.start_server()
-                lg.old_stderr=sys.stderr
-                lg.old_stdout=sys.stdout
                 sys.stderr = lg.stderr()
                 sys.stdout = lg.stdout()
             lg.debug("run now", __name__)

@@ -107,6 +107,7 @@ urls = ('/', 'index',
 
 # global app
 app = web.application(urls, globals())
+debug("Set templates dir to '%s'"%(BASE + 'templates/'))
 render = web.template.render(BASE + 'templates/', base='layout')
 db = web.database(dbn='sqlite', db=DB)
 

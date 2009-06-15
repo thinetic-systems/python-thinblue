@@ -133,4 +133,4 @@ def load_devices():
     
     lg.debug("Found 2 Bluetooth devices %s"%alldevices, __name__)
 
-__all__=['logger', 'config', 'search', 'obexftpsend', 'send', 'db', 'daemonize']
+__all__=['logger', 'config', 'search', 'obexftpsend', 'send', 'db', 'daemonize', 'update_device']
