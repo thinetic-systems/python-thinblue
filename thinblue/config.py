@@ -35,12 +35,19 @@ uid=None
 DAEMON_LOG_FILE = "/var/log/thinblue.log"
 DAEMON_PID_FILE = "/var/run/thinblue.pid"
 DBNAME = "/var/lib/thinblue/database.db"
+THINBLUE_DIR="/var/lib/thinblue/"
 
 if os.path.isdir("/.dirs/dev/thinblue"):
     DAEMON_LOG_FILE = "/.dirs/dev/thinblue/thinblue.log"
     DAEMON_PID_FILE = "/.dirs/dev/thinblue/thinblue.pid"
     DBNAME = "/.dirs/dev/thinblue/database.db"
+    THINBLUE_DIR="/.dirs/dev/thinblue/"
 
+if os.path.isdir("/home/mario/thinetic/git/python-thinblue"):
+    DAEMON_LOG_FILE = "/home/mario/thinetic/git/python-thinblue/thinblue.log"
+    DAEMON_PID_FILE = "/home/mario/thinetic/git/python-thinblue/thinblue.pid"
+    DBNAME = "/home/mario/thinetic/git/python-thinblue/database.db"
+    THINBLUE_DIR="/home/mario/thinetic/git/python-thinblue/"
 
 search_device = -1
 send_device = -1
